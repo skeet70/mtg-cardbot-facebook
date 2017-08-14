@@ -32,7 +32,9 @@ login({ email: process.env.EMAIL, password: process.env.PASSWORD }, (err, api) =
             }, message.threadID);
 
             // clean up
-            fs.unlink(`${__dirname}/${card.id}.jpg`)
+            fs.unlink(`${__dirname}/${card.id}.jpg`, err => {
+              err ? console.error(err) : console.info(`Deleted ${card.id}.jpg`);
+            });
           });
         }
       });
