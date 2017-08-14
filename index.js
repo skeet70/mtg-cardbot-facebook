@@ -23,12 +23,16 @@ login({ email: process.env.EMAIL, password: process.env.PASSWORD }, (err, api) =
           const card = cards[0];
           console.info(`Found Card Name: ${card.name}`);
 
+          // send the FB message
           const stream = request(card.imageUrl).pipe(fs.createWriteStream(`${card.id}.jpg`));
           stream.on('finish', () => {
             api.sendMessage({
               body: card.name,
               attachment: fs.createReadStream(`${__dirname}/${card.id}.jpg`)
             }, message.threadID);
+
+            // clean up
+            fs.unlink(`${__dirname}/${card.id}.jpg`)
           });
         }
       });
