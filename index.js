@@ -3,18 +3,17 @@ const mtg = require('mtgsdk');
 const request = require('request');
 const fs = require('fs');
 
-// Set configuration parameters here.
-// Needs to export an object with groupId, email, and password.
-const config = require('./config');
+// Set configuration parameters here in the environment.
+// Expects GROUP_ID (thread id), EMAIL, and PASSWORD.
 
-const cardnameRE = new RegExp('c\/(.*)\/');
+const cardnameRE = new RegExp('[Cc]\/(.*)\/');
 
-login({ email: config.email, password: config.password}, (err, api) => {
+login({ email: process.env.EMAIL, password: process.env.PASSWORD }, (err, api) => {
   if(err) return console.error(err);
   
   api.listen((err, message) => {
     console.info(`Message: ${message.body}`);
-    if (message.threadID == config.groupId && cardnameRE.test(message.body)) {
+    if (message.threadID == process.env.GROUP_ID && cardnameRE.test(message.body)) {
       const name = message.body.match(cardnameRE)[1];
       console.info(`Card Name: ${name}`);
 
