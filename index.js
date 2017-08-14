@@ -21,6 +21,8 @@ login({ email: process.env.EMAIL, password: process.env.PASSWORD }, (err, api) =
         if (cards.length > 0) {
           // get the card image
           const card = cards[0];
+          console.info(`Found Card Name: ${card.name}`);
+
           const stream = request(card.imageUrl).pipe(fs.createWriteStream(`${card.id}.jpg`));
           stream.on('finish', () => {
             api.sendMessage({

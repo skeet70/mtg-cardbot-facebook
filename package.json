@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Murph",
   "license": "MIT",
+  "engines": {
+    "node": "8.2.1"
+  },
   "dependencies": {
     "facebook-chat-api": "^1.4.0",
     "mtgsdk": "^0.3.0",
