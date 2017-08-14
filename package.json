@@ -1,0 +1,12 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Murph",
+  "license": "MIT",
+  "dependencies": {
+    "facebook-chat-api": "^1.4.0",
+    "mtgsdk": "^0.3.0",
+    "request": "^2.81.0"
+  }
+}
