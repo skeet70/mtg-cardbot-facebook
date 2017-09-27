@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const cardnameRE = new RegExp('[Cc]\/(.*)\/');
 
-login({ email: process.env.EMAIL, password: process.env.PASSWORD }, (err, api) => {
+login({ email: process.env.EMAIL, password: process.env.PASSWORD }, { forceLogin: true }, (err, api) => {
   if(err) return console.error(err);
   
   api.listen((err, message) => {
