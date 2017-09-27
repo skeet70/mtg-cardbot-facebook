@@ -8,9 +8,10 @@ const fs = require('fs');
 
 const cardnameRE = new RegExp('[Cc]\/(.*)\/');
 
-login({ email: process.env.EMAIL, password: process.env.PASSWORD }, { forceLogin: true }, (err, api) => {
+login({ appState: JSON.parse(process.env.APP_STATE) }, { forceLogin: true }, (err, api) => {
   if(err) return console.error(err);
   
+  //fs.writeFileSync('appstate.json', JSON.stringify(api.getAppState()));  
   api.listen((err, message) => {
     console.info(`Message: ${message.body}`);
     if (message.threadID == process.env.GROUP_ID && cardnameRE.test(message.body)) {
